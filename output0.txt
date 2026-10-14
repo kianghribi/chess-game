@@ -1,0 +1,13 @@
+invalid command
+invalid command
+invalid command
+username format is invalid
+password format is invalid
+register successful
+password format is invalid
+a user exists with this username
+username format is invalid
+invalid command
+register successful
+register successful
+invalid command

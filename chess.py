@@ -1,5 +1,5 @@
 import sys
-
+import re
 class User:
     username:str=""
     password:str=""
@@ -119,34 +119,62 @@ class Chess:
 
             
             print(  "|".join(cells) + "|")
-    f1=open("input0.txt","rt")
-    sys.stdin= f1
-    f2=open("output0.txt" , "wt")
-    sys.stdout = f2
+import sys
+import re
+
+users = {}
+
+f1 = open("input0.txt", "rt")
+sys.stdin = f1
+f2 = open("output0.txt", "wt")
+sys.stdout = f2
+
+while True:
+
+    s = input()
+   
+    if s.strip() == "exit":
+        break
+
+    parts = s.strip().split(" ")
+  
+    if len(parts) != 3:
+        print("invalid command")
+
+    elif parts[0] != "register":
+        print("invalid command")
+
+   
+    elif parts[0] == "register":
+        username = parts[1]
+        password = parts[2]
+
+        
+        if not re.search(r"^[a-zA-Z0-9_]+$", username):
+            print("username format is invalid")
+            continue
+
+        
+        if not re.search(r"^[a-zA-Z0-9_]+$", password):
+            print("password format is invalid")
+            continue
+
+        
+        if username in users:
+            print("a user exists with this username")
+            continue
+
+        
+        users[username] = password
+        print("register successful")
+
+    else:
+        print("invalid command")
 
 
 c1=Chess()
 c1.print_chess()
-level = "register"
-while True:
-    if level=="register":
-        print("1.register")
-        print("2.login")
-        print("3.remove")
-        print("4.help")
-        print("0.exit")
-        cmd=int(input())
-        if cmd==1:
-            level="register"
-        elif cmd==2:
-            level="login"
-        elif cmd==3:
-            level="remove"
-        elif cmd==4:
-            level="help"
-        elif cmd==0:
-            level="register"
-            print("exit")
+
 
 
 
