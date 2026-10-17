@@ -119,6 +119,8 @@ class Chess:
 
             
             print(  "|".join(cells) + "|")
+
+
 import sys
 import re
 
@@ -130,50 +132,31 @@ f2 = open("output0.txt", "wt")
 sys.stdout = f2
 
 while True:
-
     s = input()
-   
-    if s.strip() == "exit":
+
+    parts = s.strip().split()
+
+    if len(parts) == 1 and parts[0] == "exit":
         break
-
-    parts = s.strip().split(" ")
-  
-    if len(parts) != 3:
+    elif len(parts) != 3:
         print("invalid command")
-
     elif parts[0] != "register":
         print("invalid command")
-
-   
-    elif parts[0] == "register":
-        username = parts[1]
-        password = parts[2]
-
-        
-        if not re.search(r"^[a-zA-Z0-9_]+$", username):
-            print("username format is invalid")
-            continue
-
-        
-        if not re.search(r"^[a-zA-Z0-9_]+$", password):
-            print("password format is invalid")
-            continue
-
-        
-        if username in users:
-            print("a user exists with this username")
-            continue
-
-        
-        users[username] = password
+    elif not re.search(r"^[a-zA-Z0-9_]+$", parts[1]):
+        print("username format is invalid")
+    elif not re.search(r"^[a-zA-Z0-9_]+$", parts[2]):
+        print("password format is invalid")
+    elif parts[1] in users:
+        print("a user exists with this username")
+    else:
+        users[parts[1]] = parts[2]
         print("register successful")
 
-    else:
-        print("invalid command")
-
+f1.close()
+f2.close()
 
 c1=Chess()
-c1.print_chess()
+#c1.print_chess()
 
 
 
